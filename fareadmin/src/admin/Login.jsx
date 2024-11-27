@@ -1,7 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; // For navigation after successful login
 import logo from '../img/logo.png';
 
 function Login() {
+  const [login, setLogin] = useState(""); // State for login input
+  const [password, setPassword] = useState(""); // State for password input
+  const [error, setError] = useState(""); // State for error messages
+  const navigate = useNavigate(); // For navigation
+
+  // Handle login
+  const handleLogin = () => {
+    if (login === "admin" && password === "admin123") {
+      navigate("/admin");
+    } else {
+      setError("Invalid login credentials.");
+    }
+  };
+  
+
   return (
     <div className="flex items-center justify-center h-screen bg-blue-100">
       {/* Left Section */}
@@ -21,6 +37,9 @@ function Login() {
         <h2 className="text-2xl font-bold text-blue-700 text-center">
           Admin Login
         </h2>
+        {error && (
+          <p className="text-red-600 text-sm text-center">{error}</p>
+        )}
         <div className="space-y-4">
           {/* Login Field */}
           <div>
@@ -28,12 +47,14 @@ function Login() {
               htmlFor="login"
               className="block text-sm font-semibold text-gray-600 mb-1"
             >
-              Login
+              Username
             </label>
             <input
               id="login"
               type="text"
-              placeholder="Email or phone number"
+              placeholder="Enter your username"
+              value={login}
+              onChange={(e) => setLogin(e.target.value)} // Update state
               className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600"
             />
           </div>
@@ -50,17 +71,19 @@ function Login() {
               <input
                 id="password"
                 type="password"
-                placeholder="Enter password"
+                placeholder="Enter your password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)} // Update state
                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600"
               />
-              <button className="absolute inset-y-0 right-4 text-gray-600 focus:outline-none">
-                👁️
-              </button>
             </div>
           </div>
 
           {/* Sign In Button */}
-          <button className="w-full bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
+          <button
+            onClick={handleLogin} // Handle login on button click
+            className="w-full bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+          >
             Sign in
           </button>
         </div>

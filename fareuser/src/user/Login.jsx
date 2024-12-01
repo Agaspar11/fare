@@ -1,85 +1,91 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
-
-    // Simulate authentication
-    if (email === "user@example.com" && password === "password") {
+    if (username === "user123" && password === "password") {
       alert("Login successful!");
-      navigate("/dashboard");
     } else {
       alert("Invalid credentials. Please try again.");
     }
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-lg">
-        <h2 className="text-2xl font-bold text-center text-blue-600">Log In</h2>
-        <p className="text-sm text-center text-gray-500">
-          Welcome back! Please log in to your account.
-        </p>
+    <div className="flex items-center justify-center min-h-screen bg-white">
+      <div className="w-full max-w-md p-8">
+        {/* Header */}
+        <div className="text-center mb-6">
+          <h1
+            className="text-2xl font-bold"
+            style={{ color: "#1F41BB" }}
+          >
+            Login here
+          </h1>
+          <p className="text-gray-600">Welcome back you’ve been missed!</p>
+        </div>
 
+        {/* Form */}
         <form className="space-y-6" onSubmit={handleLogin}>
+          {/* Username Input */}
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-              Email
-            </label>
             <input
-              type="email"
-              id="email"
-              className="w-full px-3 py-2 mt-1 text-sm border rounded-md focus:ring-blue-500 focus:border-blue-500"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your email"
+              type="text"
+              className="w-full px-4 py-3 border rounded-md text-sm focus:ring focus:ring-[#1F41BB] focus:border-[#1F41BB] placeholder-gray-500"
+              placeholder="Username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
               required
             />
           </div>
 
+          {/* Password Input */}
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-              Password
-            </label>
             <input
               type="password"
-              id="password"
-              className="w-full px-3 py-2 mt-1 text-sm border rounded-md focus:ring-blue-500 focus:border-blue-500"
+              className="w-full px-4 py-3 border rounded-md text-sm focus:ring focus:ring-[#1F41BB] focus:border-[#1F41BB] placeholder-gray-500"
+              placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter your password"
               required
             />
           </div>
 
+          {/* Forgot Password */}
+          <div className="text-right">
+            <a
+              href="/forgot-password"
+              className="text-sm hover:underline"
+              style={{ color: "#1F41BB" }}
+            >
+              Forgot your password?
+            </a>
+          </div>
+
+          {/* Sign In Button */}
           <button
             type="submit"
-            className="w-full px-4 py-2 text-sm font-bold text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none"
+            className="w-full py-3 text-sm font-bold text-white rounded-md shadow-md"
+            style={{
+              backgroundColor: "#1F41BB",
+              boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+            }}
           >
-            Log In
+            Sign in
           </button>
         </form>
 
-        <div className="text-center">
-          <p className="text-sm text-gray-500">
-            Forgot your password?{" "}
-            <a href="/reset" className="text-blue-600 hover:underline">
-              Reset it here
-            </a>
-            .
-          </p>
-          <p className="mt-2 text-sm text-gray-500">
-            Don't have an account?{" "}
-            <a href="/register" className="text-blue-600 hover:underline">
-              Sign up
-            </a>
-            .
-          </p>
+        {/* Create New Account */}
+        <div className="text-center mt-6">
+          <a
+            href="/register"
+            className="text-sm hover:underline"
+            style={{ color: "#1F41BB" }}
+          >
+            Create new account
+          </a>
         </div>
       </div>
     </div>
